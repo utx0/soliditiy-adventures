@@ -20,19 +20,19 @@ contract StakeContractTest is Test {
         token.approve(address(stakeContract), AMOUNT);
 
         // Test balance of tokens before staking
-        assertEq(token.balanceOf(address(this)),1e18 * 1_000_000);
+        assertEq(token.balanceOf(address(this)), 1e18 * 1_000_000);
 
         // Stake AMOUNT of tokens
         bool success = stakeContract.stake(AMOUNT, address(token));
         assertTrue(success);
 
         // Test mapping balance of addresses with staked tokens in contract
-        assertEq(stakeContract.s_balances(address(this)),AMOUNT);
+        assertEq(stakeContract.s_balances(address(this)), AMOUNT);
 
         // Test balance of contract
         assertEq(token.balanceOf(address(stakeContract)), AMOUNT);
 
         // Test balance of tokens after the staking of tokens
-        assertEq(token.balanceOf(address(this)),1e18 * 1_000_000 - AMOUNT);
+        assertEq(token.balanceOf(address(this)), 1e18 * 1_000_000 - AMOUNT);
     }
 }

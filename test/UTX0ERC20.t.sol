@@ -9,6 +9,6 @@ contract UTX0ContractTest is Test {
     function setUp() public {
         token = new MockUTX0ERC20();
         // Test tokens have minted correctly.
-        assertEq(token.balanceOf(address(this)),1e18 * 1_000_000);
+        assertEq(token.balanceOf(address(this)), 1e18 * 1_000_000);
     }
 }
