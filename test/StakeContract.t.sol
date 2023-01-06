@@ -16,11 +16,20 @@ contract StakeContractTest is Test {
     }
 
     function testStakingTokens() public {
+        // token approved to stake AMOUNT
         token.approve(address(stakeContract), AMOUNT);
+
+        // Test balance of tokens before staking
         assertEq(token.balanceOf(address(this)),1e18 * 1_000_000);
+
+        // Stake AMOUNT of tokens
         bool success = stakeContract.stake(AMOUNT, address(token));
         assertTrue(success);
+
+        // Test balance of staked tokens in contract
         assertEq(stakeContract.s_balances(address(this)),AMOUNT);
+
+        // Test balance of tokens after the staking of tokens
         assertEq(token.balanceOf(address(this)),1e18 * 1_000_000 - AMOUNT);
     }
 }
