@@ -14,4 +14,11 @@ contract StakeContract {
         if (!success) revert StakeContract__TransferFailed();
         return success;
     }
+
+    function unStake(uint256 amount, address token) external returns (bool) {
+        s_balances[msg.sender] -= amount;
+        bool success = IERC20(token).transfer(msg.sender, amount);
+        if (!success) revert StakeContract__TransferFailed();
+        return success;
+    }
 }

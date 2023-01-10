@@ -35,4 +35,29 @@ contract StakeContractTest is Test {
         // Test balance of tokens after the staking of tokens
         assertEq(token.balanceOf(address(this)), 1e18 * 1_000_000 - AMOUNT);
     }
+
+    function testUnStakingTokens() public {
+        // token approved to stake AMOUNT
+        token.approve(address(stakeContract), AMOUNT);
+
+        // Stake AMOUNT of tokens
+        bool success = stakeContract.stake(AMOUNT, address(token));
+        assertTrue(success);
+
+        // Test balance of tokens before unstaking
+        assertEq(token.balanceOf(address(this)), 1e18 * 1_000_000 - AMOUNT);
+
+        // Unstake AMOUNT of tokens
+        success = stakeContract.unStake(AMOUNT, address(token));
+        assertTrue(success);
+
+        // Test mapping balance of addresses with staked tokens in contract
+        assertEq(stakeContract.s_balances(address(this)), 0);
+
+        // Test balance of contract
+        assertEq(token.balanceOf(address(stakeContract)), 0);
+
+        // Test balance of tokens after the unstaking of tokens
+        assertEq(token.balanceOf(address(this)), 1e18 * 1_000_000);
+    }
 }
