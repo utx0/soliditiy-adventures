@@ -1,0 +1,64 @@
+{
+  "name": "solidity-adventures",
+  "version": "1.0.0",
+  "description": "",
+  "main": "''",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "update:foundry": "foundryup",
+    "install:foundry": "foundryup || curl -L https://foundry.paradigm.xyz | bash",
+    "build": "forge build",
+    "test": "forge test",
+    "test:specs": "jest",
+    "test:specs:watch": "jest --watch",
+    "test:watch": "git ls-files | entr -c -s 'forge test -vv'",
+    "test:watch:debug": "git ls-files | entr -c -s 'forge test -vvv'",
+    "prettier": "prettier --write **.sol",
+    "prettier:list": "prettier --list-different **.sol",
+    "prettier:check": "prettier --check **.sol",
+    "solhint": "solhint --config ./.solhint.json 'src/**/*.sol' 'script/**/*.sol' --fix",
+    "solhint:check": "solhint --config ./.solhint.json 'src/**/*.sol'",
+    "lint": "npm run prettier && npm run solhint",
+    "lint:check": "npm run prettier:check && npm run solhint:check",
+    "lint:watch": "git ls-files | entr -c -s 'npm run lint'",
+    "start:localnet": "anvil -m 'test test test test test test test test test test test junk'",
+    "deploy:localnet": "source ./.env.localnet && forge script -vvv script/deploy/DeployLocalnet.s.sol:DeployLocalnet --rpc-url http://localhost:8545 --broadcast",
+    "deploy:sepolia": "source ./.env.sepolia && forge script -vvv script/deploy/DeploySepolia.s.sol:DeploySepolia --rpc-url https://rpc.sepolia.org --broadcast",
+    "tsc:build": "rimraf ./build && tsc"
+  },
+  "keywords": [
+    "smart",
+    "contracts",
+    "evm"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@jest/globals": "^29.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.14.6",
+    "@types/supertest": "^2.0.12",
+    "babel-jest": "^29.5.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^6.2.3",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.21",
+    "prettier": "^2.5.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "rimraf": "^4.4.0",
+    "solhint": "^3.3.6",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
